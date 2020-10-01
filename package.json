@@ -1,0 +1,31 @@
+{
+  "name": "comfyjazz",
+  "version": "1.0.0",
+  "description": "Comfiest Computer-Generated Twitch-Integrate Jazz Music!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/instafluff/ComfyJazz.git"
+  },
+  "keywords": [
+    "Instafluff",
+    "Comfy",
+    "Jazz",
+    "Music",
+    "Twitch",
+    "Computer",
+    "Generated"
+  ],
+  "author": "Instafluff",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/instafluff/ComfyJazz/issues"
+  },
+  "homepage": "https://github.com/instafluff/ComfyJazz#readme",
+  "dependencies": {
+    "webwebweb": "^1.4.0"
+  }
+}
