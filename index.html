@@ -2,46 +2,64 @@
 	<head>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js" integrity="sha512-ALoawPS0JxHQ+8dGL7htZIlVNRaE/SN9gHD4G8pJJTi9H4BQ/3PjdvhggSGR34g00mvTPFkxQuveQUsJA5664Q==" crossorigin="anonymous"></script>
 		<script src="https://cdn.jsdelivr.net/npm/comfy.js@latest/dist/comfy.min.js"></script>
-		<script src="web/jazzyjazz.js"></script>
+		<script src="web/ComfyJazz.js"></script>
+
+		<style>
+
+			#comfy-controls {
+				padding:40px;
+				background-color:#ccc;
+				display:block;
+			}
+
+			#comfy-controls.hide {
+				display:none;
+			}
+		</style>
 	</head>
 	<body>
+		<div id="comfy-controls" class="hide">
+			<h1>Comfy Jazz Control Panel</h1>
+			<label for="">Volume:
+				<input type="range" min=0 max=1 step="0.05" onchange="onVolumeChange(event)">
+			</label>
+		</div>
 	<script>
-	const params = new URLSearchParams(location.search);
-    const channel = params.get("channel");
-	(async () => {
-		setTimeout( () => {
-			let startTime = performance.now();
-			playSound( `web/sounds/15439_f526d889c4bfa24d6f891b6ea6a4daad_google_night_in_teaser_loop.ogg`, 1, 1 ); //1.0594630943592953
-			setInterval( async () => {
-				let currentTime = ( performance.now() - startTime ) / 1000;
-				// console.log( "time:", currentTime );
-				if( currentTime > 27.428 ) {
-					startTime = performance.now();
-					currentTime = 0;
-					// play the loop again
-					playSound( `web/sounds/15439_f526d889c4bfa24d6f891b6ea6a4daad_google_night_in_teaser_loop.ogg` );
-				}
-				for( let i = 0; i < scaleProgression.length; i++ ) {
-					if( scaleProgression[ i ].start <= currentTime && currentTime <= scaleProgression[ i ].end ) {
-						currentScaleProgression = i;
-						break;
-					}
-				}
-				if( Math.random() < 0.2 ) {
-					let sound = getNextNote();
-					console.log( sound );
-					await playSound( `web/sounds/${sound.url}.ogg`, 1, sound.playbackRate );
-				}
-			}, 500 );
 
-			ComfyJS.onChat = ( user, message, flags, self, extra ) => {
-				let sound = getNextNote();
-				// console.log( sound );
-				playSound( `web/sounds/${sound.url}.ogg`, 1, sound.playbackRate );
-			}
-			ComfyJS.Init( channel );
-		}, 2000 );
-	})();
+	
+  //Start ComfyJazz
+	const comfyJazz = ComfyJazz({
+		autoNotesChance:0.3,
+	});
+	comfyJazz.start();
+
+	//Integrate with Twitch Chat
+	const params = new URLSearchParams(location.search);
+	const channel = params.get("channel");
+	
+	if( channel ) {
+		ComfyJS.onChat = (user, message, flags, self, extra) => {
+			comfyJazz.playNoteProgression((Math.random() * 8) >> 0);
+		};
+		ComfyJS.Init(channel);
+	}
+
+	//Keydown triggers notes
+	window.addEventListener("keydown", (e) => {
+
+		//c will open the control panel
+		if( e.code === "KeyC" ) {
+			document.querySelector("#comfy-controls").classList.toggle('hide');
+		} else {
+			// comfyJazz.playNote();
+			comfyJazz.playNoteProgression((Math.random() * 8) >> 0);
+		}
+	});
+
+	function onVolumeChange(e) {
+		comfyJazz.setVolume(e.currentTarget.value);
+	}
+
 	</script>
 	</body>
 </html>
