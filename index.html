@@ -15,13 +15,14 @@
 			#comfy-controls.hide {
 				display:none;
 			}
+			
 		</style>
 	</head>
 	<body>
 		<div id="comfy-controls" class="hide">
 			<h1>Comfy Jazz Control Panel</h1>
 			<label for="">Volume:
-				<input type="range" min=0 max=1 step="0.05" onchange="onVolumeChange(event)">
+				<input type="range" min=0 max=1 step="0.05" value=1 onchange="onVolumeChange(event)">
 			</label>
 		</div>
 	<script>
