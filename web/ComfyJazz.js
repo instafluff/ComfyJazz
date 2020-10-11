@@ -20,8 +20,8 @@ const ComfyJazz = (options = {}) => {
 
   cj.setVolume = (vol) => {
     cj.volume = vol;
-    cj.backgroundSound?.volume(vol);
-    cj.lastSound?.volume(vol);
+    cj.backgroundSound && cj.backgroundSound.volume(vol);
+    cj.lastSound && cj.lastSound.volume(vol);
   };
 
   cj.mute = () => cj.setVolume(0);
@@ -412,7 +412,7 @@ const ComfyJazz = (options = {}) => {
 
   const notes = [
     {
-      url: "piano_sampler_96",
+      url: "note_96",
       metaData: {
         root: 96,
         startRange: 95,
@@ -420,7 +420,7 @@ const ComfyJazz = (options = {}) => {
       },
     },
     {
-      url: "piano_sampler_93",
+      url: "note_93",
       metaData: {
         root: 93,
         startRange: 92,
@@ -428,7 +428,7 @@ const ComfyJazz = (options = {}) => {
       },
     },
     {
-      url: "piano_sampler_90",
+      url: "note_90",
       metaData: {
         root: 90,
         startRange: 89,
@@ -436,7 +436,7 @@ const ComfyJazz = (options = {}) => {
       },
     },
     {
-      url: "piano_sampler_87",
+      url: "note_87",
       metaData: {
         root: 87,
         startRange: 86,
@@ -444,7 +444,7 @@ const ComfyJazz = (options = {}) => {
       },
     },
     {
-      url: "piano_sampler_84",
+      url: "note_84",
       metaData: {
         root: 84,
         startRange: 83,
@@ -452,7 +452,7 @@ const ComfyJazz = (options = {}) => {
       },
     },
     {
-      url: "piano_sampler_81",
+      url: "note_81",
       metaData: {
         root: 81,
         startRange: 80,
@@ -460,7 +460,7 @@ const ComfyJazz = (options = {}) => {
       },
     },
     {
-      url: "piano_sampler_77",
+      url: "note_77",
       metaData: {
         root: 78,
         startRange: 77,
@@ -468,7 +468,7 @@ const ComfyJazz = (options = {}) => {
       },
     },
     {
-      url: "piano_sampler_74",
+      url: "note_74",
       metaData: {
         root: 75,
         startRange: 74,
@@ -476,7 +476,7 @@ const ComfyJazz = (options = {}) => {
       },
     },
     {
-      url: "piano_sampler_71",
+      url: "note_71",
       metaData: {
         root: 72,
         startRange: 71,
@@ -484,7 +484,7 @@ const ComfyJazz = (options = {}) => {
       },
     },
     {
-      url: "piano_sampler_69",
+      url: "note_69",
       metaData: {
         root: 69,
         startRange: 68,
@@ -492,7 +492,7 @@ const ComfyJazz = (options = {}) => {
       },
     },
     {
-      url: "piano_sampler_66",
+      url: "note_66",
       metaData: {
         root: 66,
         startRange: 65,
@@ -500,7 +500,7 @@ const ComfyJazz = (options = {}) => {
       },
     },
     {
-      url: "piano_sampler_63",
+      url: "note_63",
       metaData: {
         root: 63,
         startRange: 62,
@@ -508,7 +508,7 @@ const ComfyJazz = (options = {}) => {
       },
     },
     {
-      url: "piano_sampler_60",
+      url: "note_60",
       metaData: {
         root: 60,
         startRange: 59,
@@ -516,7 +516,7 @@ const ComfyJazz = (options = {}) => {
       },
     },
     {
-      url: "piano_sampler_57",
+      url: "note_57",
       metaData: {
         root: 57,
         startRange: 56,
@@ -524,7 +524,7 @@ const ComfyJazz = (options = {}) => {
       },
     },
     {
-      url: "piano_sampler_54",
+      url: "note_54",
       metaData: {
         root: 54,
         startRange: 53,
@@ -532,7 +532,7 @@ const ComfyJazz = (options = {}) => {
       },
     },
     {
-      url: "piano_sampler_51",
+      url: "note_51",
       metaData: {
         root: 51,
         startRange: 50,
@@ -540,7 +540,7 @@ const ComfyJazz = (options = {}) => {
       },
     },
     {
-      url: "piano_sampler_48",
+      url: "note_48",
       metaData: {
         root: 48,
         startRange: 0,
