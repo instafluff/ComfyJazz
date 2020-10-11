@@ -20,8 +20,12 @@ const ComfyJazz = (options = {}) => {
 
   cj.setVolume = (vol) => {
     cj.volume = vol;
-    cj.backgroundSound?.volume(vol);
-    cj.lastSound?.volume(vol);
+	if( cj.backgroundSound ) {
+		cj.backgroundSound.volume(vol);
+	}
+    if( cj.lastSound ) {
+		cj.lastSound.volume(vol);
+	}
   };
 
   cj.mute = () => cj.setVolume(0);
