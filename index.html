@@ -26,17 +26,20 @@
 		</div>
 	<script>
 
+	const params = new URLSearchParams(location.search);
 	
-  //Start ComfyJazz
+	const instrument = params.get("instrument");
+
+	//Start ComfyJazz
 	const comfyJazz = ComfyJazz({
 		autoNotesChance:0.3,
+		instrument: instrument || "piano"
 	});
 	comfyJazz.start();
-
-	//Integrate with Twitch Chat
-	const params = new URLSearchParams(location.search);
-	const channel = params.get("channel");
 	
+	//Integrate with Twitch Chat
+	const channel = params.get("channel");
+
 	if( channel ) {
 		ComfyJS.onChat = (user, message, flags, self, extra) => {
 			comfyJazz.playNoteProgression((Math.random() * 8) >> 0);
