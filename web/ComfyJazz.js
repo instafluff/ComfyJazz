@@ -82,7 +82,9 @@ const ComfyJazz = (options = {}) => {
   async function playNoteRandomly(minRandom = 0, maxRandom = 200) {
     setTimeout(async () => {
       let sound = getNextNote();
-      await playSound(`${cj.baseUrl}/${cj.instrument}/${sound.url}.ogg`, cj.volume, sound.playbackRate);
+	  const instruments = cj.instrument.split( "," ).map( x => x.trim() );
+	  let instrument = instruments[ getRandomInt( instruments.length ) ];
+      await playSound(`${cj.baseUrl}/${instrument}/${sound.url}.ogg`, cj.volume, sound.playbackRate);
     }, minRandom + Math.random() * maxRandom);
   }
 
@@ -102,17 +104,17 @@ const ComfyJazz = (options = {}) => {
     return Math.pow(e, t);
   }
 
-  // function shiftSource( tone, startRange, endRange ) {
-  // 	let a = startRange
-  // 	  , u = endRange
-  // 	  , c = new WeakMap;
-  //
-  // 	var e = c.get( tone );
-  // 	if( e ) return e;
-  // 	let n = a + Math.random() * ( u - a );
-  // 	c.set( t, n );
-  // 	return n;
-  // }
+  function shiftSource( tone, startRange, endRange ) {
+  	let a = startRange
+  	  , u = endRange
+  	  , c = new WeakMap;
+
+  	// var e = c.get( tone );
+  	// if( e ) return e;
+  	let n = a + Math.random() * ( u - a );
+  	// c.set( tone, n );
+  	return n;
+  }
 
   function playBackgroundSound(url, volume = 1, rate = 1) {
     return new Promise((resolve, reject) => {
@@ -140,6 +142,7 @@ const ComfyJazz = (options = {}) => {
       });
       a.rate(rate);
       a.play();
+	  a.fade( 1.0, 0.0, 1000 );//a.duration() * 500 );
       cj.lastSound = a;
     });
   }
@@ -166,6 +169,8 @@ const ComfyJazz = (options = {}) => {
     var a = n || 48,
       s = null;
     s = notes.filter((x) => x.metaData.startRange <= a && a <= x.metaData.endRange)[0];
+	// NOTE: OOPS THIS MIGHT BE THE WRONG SPOT FOR SHIFTSOURCE
+	// let shifted = shiftSource( s.metaData.root, s.metaData.startRange, s.metaData.endRange );
     let c = a - s.metaData.root;
     let playbackRate = semitonesToPlaybackRate(c);
     // console.log("playback", c, playbackRate);
