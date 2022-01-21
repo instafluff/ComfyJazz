@@ -142,7 +142,7 @@ const ComfyJazz = (options = {}) => {
       });
       a.rate(rate);
       a.play();
-	  a.fade( 1.0, 0.0, 1000 );//a.duration() * 500 );
+      a.fade( volume, 0.0, 1000 );//a.duration() * 500 );
       cj.lastSound = a;
     });
   }
