@@ -28,11 +28,13 @@
 	const params = new URLSearchParams(location.search);
 
 	const instrument = params.get("instrument");
+	const volume = params.get("volume");
 
 	//Start ComfyJazz
 	const comfyJazz = ComfyJazz({
 		autoNotesChance:0.3,
 		instrument: instrument || "piano"
+		volume: volume || 1
 	});
 	comfyJazz.start();
 
