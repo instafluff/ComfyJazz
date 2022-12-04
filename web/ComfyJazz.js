@@ -32,7 +32,7 @@ const ComfyJazz = (options = {}) => {
     let startTime = performance.now();
 
     //initial start of the background music
-    playBackgroundSound(`${cj.baseUrl}/${cj.backgroundLoopUrl}`, cj.volume, 1); //1.0594630943592953
+    playBackgroundSound(`${cj.soundFolder}/${cj.backgroundLoopUrl}`, cj.volume, 1); //1.0594630943592953
 
     //this will Automatically play a note and then call itself again after a delay
     const AutomaticPlayNote = async () => {
@@ -43,7 +43,7 @@ const ComfyJazz = (options = {}) => {
         currentTime = 0;
 
         // play the background music again
-        playBackgroundSound(`${cj.baseUrl}/${cj.backgroundLoopUrl}`, cj.volume, 1);
+        playBackgroundSound(`${cj.soundFolder}/${cj.backgroundLoopUrl}`, cj.volume, 1);
       }
 
       for (let i = 0; i < scaleProgressions.length; i++) {
@@ -72,13 +72,17 @@ const ComfyJazz = (options = {}) => {
       let sound = getNextNote();
 	  const instruments = cj.instrument.split( "," ).map( x => x.trim() );
 	  let instrument = instruments[ getRandomInt( instruments.length ) ];
-      await playSound(`${cj.baseUrl}/${instrument}/${sound.url}.ogg`, cj.volume, sound.playbackRate);
+      await playSound(`${cj.soundFolder}/${instrument}/${sound.url}.ogg`, cj.volume, sound.playbackRate);
     }, minRandom + Math.random() * maxRandom);
   }
 
   //Play a progression of notes, with random delay spacing!
   function playNoteProgression(numNotes) {
-    for (var i = 0; i < numNotes; i++) {
+    if (numNotes == null) {
+      numNotes = (Math.random() * 8) >> 0;
+    }
+
+    for (let i = 0; i < numNotes; i++) {
       playNoteRandomly(100, 200 * i);
     }
   }
