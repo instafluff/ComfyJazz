@@ -23,6 +23,7 @@ const ComfyJazz = (options = {}) => {
     cj.start = () => startComfyJazz();
 
     cj.playNoteProgression = playNoteProgression;
+    cj.playCustomProgression = playCustomProgression;
     cj.playNote = playNoteRandomly;
 
     /////////////////////
@@ -90,8 +91,36 @@ const ComfyJazz = (options = {}) => {
         }, minRandom + Math.random() * maxRandom);
     }
 
-    // Play a progression of notes, with random delay spacing!
+    // Play a note from a folder with the option to play them in order. Also caches the list of file names for
+    // quick repeated access
+    // todo: Implement this
+    async function playSoundFromFolder(custom, playInOrder) {
+        setTimeout(async () => {
+            let sound = getNextNote();
+            const instruments = cj.instrument.split(",").map((x) => x.trim());
+            let instrument = instruments[getRandomInt(instruments.length)];
+            await playSound(
+                `${cj.soundFolder}/${instrument}/${sound.url}.ogg`,
+                cj.volume,
+                sound.playbackRate
+            );
+        }, minRandom + Math.random() * maxRandom);
+    }
+
+    // Play a progression of notes, with random delay spacing between each
     function playNoteProgression(numNotes) {
+        if (numNotes == null) {
+            numNotes = (Math.random() * 8) >> 0;
+        }
+
+        for (let i = 0; i < numNotes; i++) {
+            playNoteRandomly(100, 200 * i);
+        }
+        return numNotes;
+    }
+
+    // Play a custom sound progression, with the option to play them in order
+    function playCustomProgression(custom, playInOrder) {
         if (numNotes == null) {
             numNotes = (Math.random() * 8) >> 0;
         }

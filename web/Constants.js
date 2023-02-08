@@ -2,12 +2,14 @@
 const defaultOptions = {
     soundFolder: "web/sounds",
     instrument: "piano",
-    autoNotesDelay: 300, //how often should we try to play notes, in milliseconds?
-    autoNotesChance: 0.2, //what % (0.0 - 1.0) chance is there to play an auto note?
-    playAutoNotes: true, //should we automatically play notes?
+    autoNotesDelay: 300, // How often should we try to play notes, in milliseconds?
+    autoNotesChance: 0.2, // What % (0.0 - 1.0) chance is there to play an auto note?
+    playAutoNotes: true, // Automatically play notes?
     backgroundLoopUrl: "jazz_loop.ogg",
     backgroundLoopDuration: 27.428,
     volume: 1,
+    maxNotes: 8, // Play between 0 and maxNotes notes when a chat message is received
+    playInOrder: false,
 };
 
 const maxNotesPerPattern = 30;

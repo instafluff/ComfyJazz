@@ -15,14 +15,18 @@
     "Jazz",
     "Music",
     "Twitch",
+    "YouTube",
     "Computer",
     "Generated"
   ],
-  "author": "Instafluff",
+  "author": {
+    "name": "zephsinx",
+    "url": "https://github.com/zephsinx"
+  },
   "contributors": [
     {
-      "name": "zephsinx",
-      "url": "https://github.com/zephsinx"
+      "name": "Instafluff",
+      "url": "https://github.com/Instafluff"
     }
   ],
   "license": "MIT",
